@@ -1,2 +1,1 @@
-
-This is a project that I made to practice my react skills
+This is a React project that allows the user to search Youtube videos
