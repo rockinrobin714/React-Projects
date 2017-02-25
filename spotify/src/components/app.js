@@ -10,18 +10,21 @@ export default class App extends Component {
     super(props);
     this.state = {
       song: '',
+      tracks: {},
     };
   }
-fetchSongs = () => {
-	searchSpotify(this.state.song)
-		.then((tracks) => console.log('tracks',tracks))
-}
+
+	fetchSongs = () => {
+		searchSpotify(this.state.song)
+			.then(( {tracks}) => this.setState({ tracks }))
+	}
   render() {
-    const { initialMessage, song } = this.state;
+    const { tracks } = this.state;
+    console.log(tracks)
     return (
       <div>
       	<SearchBar fetchSongs={this.fetchSongs} updateText={(song) => this.setState({song})}/>
-        <SongItem />
+        {tracks.items && <SongItem songData={tracks.items[0]} />}
       </div>
     );
   }
