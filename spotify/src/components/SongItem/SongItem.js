@@ -10,7 +10,7 @@ const SongItem = (props) => {
 		<div className={styles.root}>
 			<div className={styles.albun}>
 				<img role='presentation' src={albumImage.url} />
-				<span classNAme={styles.albumName}>{albumName}</span>
+				<span className={styles.albumName}>{albumName}</span>
 			</div>
 			<div className={styles.songAndDescription}>
 				<audio controls duration src={songData.preview_url}/>

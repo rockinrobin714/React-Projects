@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './app.css';
 import SearchBar from './SearchBar/SearchBar.js';
 import SongItem from './SongItem/SongItem.js';
 
@@ -20,9 +21,9 @@ export default class App extends Component {
 	}
   render() {
     const { tracks } = this.state;
-    console.log(tracks)
+
     return (
-      <div>
+      <div className={styles.root}>
       	<SearchBar fetchSongs={this.fetchSongs} updateText={(song) => this.setState({song})}/>
         {tracks.items && <SongItem songData={tracks.items[0]} />}
       </div>
