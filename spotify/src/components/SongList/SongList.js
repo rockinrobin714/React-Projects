@@ -11,7 +11,7 @@ const eachSong = (props) => {
 				src={albumImage.url}
 				className={styles.image}
 			/>
-			<span className={styles.songDescription}>Name{props.name}</span>
+			<span className={styles.songDescription}>Name: {props.name}</span>
 		</div>
 	);
 };
