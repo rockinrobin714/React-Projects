@@ -5,7 +5,6 @@ class App extends Component {
     super(props);
     this.state = {
     	searchQuery: '',
-    	groups: ['all','sales','it','support']
     }
   }
   search(){
@@ -13,9 +12,10 @@ class App extends Component {
   	this.setState({searchQuery: ''});
   }
   render () {
+  	const groups = ['all','sales','it','support'];
     return (
       <section id='navbar'>
-      {this.state.groups.map(group => 
+      {groups.map(group => 
       	this.props.currentGroup===group ?
       	<div 
       		key={group} 
