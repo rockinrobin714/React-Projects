@@ -8,8 +8,10 @@ class App extends Component {
     }
   }
   search(){
-  	this.props.searchForPerson(this.state.searchQuery);
-  	this.setState({searchQuery: ''});
+  	if(this.state.searchQuery){
+  		this.props.searchForPerson(this.state.searchQuery);
+  		this.setState({searchQuery: ''});
+  	}
   }
   render () {
   	const groups = ['all','sales','it','support'];
