@@ -13,6 +13,7 @@ export default class App extends Component {
     const { initialMessage } = this.state;
     return (
       <div>
+      YOYO
         {initialMessage}
       </div>
     );

@@ -1,0 +1,12 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+iisnode.yml
+npm-debug.log
+
+node_modules
+bower_components
+app/public/dist
+
+# Icon must ends with two \r.
+Icon
