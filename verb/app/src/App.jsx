@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
     	currentGroup: 'all',
-    	searchQuery: '',
+    	searchTitle: '',
     	allData: [
             {id: 1, firstName:'Bob', lastName:'Johnson', region:'Austin', group:'sales'},
             {id: 2, firstName:'Joe', lastName:'Jackson', region:'Dallas', group:'it'},
@@ -35,6 +35,7 @@ class App extends Component {
   }
   componentDidMount(){
   	//change
+  	console.log('component did mount')
   	this.setState({shownData: this.state.allData})
   	this.filterData();
   }
@@ -53,19 +54,38 @@ class App extends Component {
   		}
   	}
   	this.setState({salesData: sales, itData: it, supportData: support})
-  	console.log(sales, it, support)
   }
   changeGroup(group){
   	this.setState({currentGroup:group})
-  	this.filterData();
+  	if (group==="sales"){
+  		this.setState({shownData: this.state.salesData})
+  	} else if (group==='it'){
+  		this.setState({shownData: this.state.itData})
+  	} else if (group==='all'){
+  		this.setState({shownData: this.state.allData})
+  	} else {
+  		this.setState({shownData: this.state.supportData})
+  	}
+  	this.setState({searchTitle: ''})
   }
-  searchForPerson(person){
-  	//TODO
-  	this.setState({currentGroup: 'none'})
+  searchForPerson(query){
+  	let filteredData = this.state.allData.filter( person => {
+  		return person.firstName.toLowerCase().includes(query.toLowerCase()) || person.lastName.toLowerCase().includes(query.toLowerCase())
+  	})
+  	if (filteredData.length ===0){
+  		this.setState({searchTitle: `No results found for "${query}"`})
+  	} else {
+  		this.setState({searchTitle: `Search results for "${query}"`})
+  	}
+  	this.setState({currentGroup: 'none', shownData: filteredData})
   }
   capitalizeTitle(){
-  	const titles = {'all': 'All Employees', 'sales':'Sales', 'it':"IT", 'support':'Support'};
-  	return <h1 id='title'>{titles[this.state.currentGroup]}</h1>
+  	if (this.state.searchTitle){
+  		return <h1 id='title'>{this.state.searchTitle}</h1>
+  	} else {
+  		const titles = {'all': 'All Employees', 'sales':'Sales', 'it':"IT", 'support':'Support'};
+  		return <h1 id='title'>{titles[this.state.currentGroup]}</h1>
+  	}
   }	
   render () {
     return (
