@@ -8,33 +8,37 @@ class App extends Component {
     	groups: ['all','sales','it','support']
     }
   }
-
+  search(){
+  	this.props.searchForPerson(this.state.searchQuery);
+  	this.setState({searchQuery: ''});
+  }
   render () {
-  	console.log(this.state)
     return (
       <section id='navbar'>
-      {this.state.groups.map => (group) {
-      	<div className='nav-item'>
-            {group}
-        </div>
-      }}
-        
-        <div className='nav-item'>
-            Sales
-        </div>
-         <div className='nav-item'>
-            IT
-        </div>
-        <div className='nav-item'>
-            Support
-        </div>
+      {this.state.groups.map(group => 
+      	this.props.currentGroup===group ?
+      	<div 
+      		key={group} 
+      		className='nav-item selected'
+      		onClick={()=> this.props.changeGroup(group)}
+      	>{group} </div> :
+        <div 
+        	key={group} 
+        	className='nav-item'
+        	onClick={()=> this.props.changeGroup(group)}
+        > {group}</div>
+      )}
         <div className='search'>
             <input 
-            	default={'cat'}
+            	placeholder={'Search for employee'}
             	onChange={(e)=> this.setState({searchQuery:e.target.value})}
             	value={this.state.searchQuery}
             />
-            <i className="fa fa-search fa-lg" aria-hidden="true"></i>
+            <i 
+            	className="fa fa-search fa-lg" 
+            	aria-hidden="true"
+            	onClick={this.search.bind(this)}
+            ></i>
         </div>
     </section>
     )
