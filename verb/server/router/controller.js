@@ -7,10 +7,10 @@ const db = require('../db/schema.js');
 //   }
 // }
 
-// module.exports = {
+module.exports = {
 
-//   user: {
-//     get: (req, res) => {
+//   employees: {
+//     all: (req, res) => {
 //       db.User.findOne({fb_id: req.user.id}).exec()
 //         .then((user) => {
 //           res.status(200).send(user);
@@ -20,22 +20,25 @@ const db = require('../db/schema.js');
 //           res.sendStatus(400);
 //         })
 //     },
-//     loggedIn: (req, res) => {
+//     it: (req, res) => {
 //       if (req.user.id) {
 //         res.send(true);
 //       } else {
 //         res.send(false);
 //       }
 //     },
-//     logout: (req, res) => {
+//     sales: (req, res) => {
+//       req.session.destroy();
+//       res.redirect('/');
+//     },
+		// support: (req, res) => {
 //       req.session.destroy();
 //       res.redirect('/');
 //     }
 //   },
 
-//   group: {
-//     // Group controller functions for GET
-//     get: (req, res) => {
+  // searchQuery: {
+  //   get: (req, res) => {
 //       db.Group.find().exec()
 //         .then((groups) => {
 //           let response = buildResObj(groups);
@@ -75,38 +78,23 @@ const db = require('../db/schema.js');
 //     }
 //   },
 
-//   volunteer: {
-//     // Volunteer controller functions for GET
-//     get: (req, res) => {
-//       db.Order.find().exec()
-//         .then((volunteers) => {
-//           let response = buildResObj(volunteers);
-//           res.status(200).send(response);
-//         })
-//         .catch((err) => {
-//           console.error(err);
-//           res.sendStatus(400);
-//         })
-//     },
-//     // Volunteer controller functions for POST
-//     post: (req, res) => {
-
-//       new db.Order({
-//         order_user: req.body.data.username,
-//         location: req.body.data.location,
-//         time: req.body.data.time,
-//         picture: req.body.data.picture,
-//         group_id: req.body.data.groupId,
-//         requests: req.body.data.requests
-//       }).save()
-//       .then((data) => {
-//         res.status(201).send(data);
-//       })
-//       .catch((err) => {
-//         res.sendStatus(400)
-//       })
-//     }
-//   },
+  employees: {
+    post: (req, res) => {
+    	console.log("the request is", req.body)
+      new db.User({
+        firstName: 'Tom',
+			lastName: 'Cruise',
+			region: 'Austin',
+			group: 'Sales'
+      }).save()
+      .then((data) => {
+        res.status(201).send(data);
+      })
+      .catch((err) => {
+        res.sendStatus(400)
+      })
+    }
+  },
 
 //   request: {
 //     // Request controller functions for POST
@@ -136,4 +124,4 @@ const db = require('../db/schema.js');
 //      }
 //    },  
   
-// }  
+}  
