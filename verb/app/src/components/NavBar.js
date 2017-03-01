@@ -6,12 +6,19 @@ class NavBar extends Component {
     this.state = {
     	searchQuery: '',
     }
+    this.handleKeyPress=this.handleKeyPress.bind(this)
   }
   search(){
+  	console.log(this)
   	if(this.state.searchQuery){
   		this.props.searchForPerson(this.state.searchQuery);
   		this.setState({searchQuery: ''});
   	}
+  }
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+     this.search()
+    }
   }
   render () {
   	const groups = ['all','sales','it','support'];
@@ -34,6 +41,7 @@ class NavBar extends Component {
             <input 
             	placeholder={'Search for employee'}
             	onChange={(e)=> this.setState({searchQuery:e.target.value})}
+         		onKeyPress={this.handleKeyPress}
             	value={this.state.searchQuery}
             />
             <i 
