@@ -32,7 +32,8 @@ class App extends Component {
             ],
         shownData: [],
         index: 15,
-        editing: {id: 18, firstName:'Terry', lastName:'Samuel', region:'Houston', group:'support'}
+        editing: false
+        //editing: {id: 18, firstName:'Terry', lastName:'Samuel', region:'Houston', group:'support'}
     }
   }
   componentDidMount(){
@@ -40,6 +41,16 @@ class App extends Component {
   	console.log('component did mount')
   	this.setState({shownData: this.state.allData})
   	this.filterData();
+  }
+  editPerson(person){
+  	this.setState({editing: person})
+  }
+  cancelEdit(){
+  	this.setState({editing: false})
+  }
+  submitEdit(){
+  	//callToDB
+  	this.setState({editing: false})
   }
   filterData(){
   	let sales = [];
@@ -92,7 +103,6 @@ class App extends Component {
   	}
   }	
   render () {
-  	console.log('modal in app is', this.state.openModal)
     return (
     	<div className='container'>
      		<NavBar 
@@ -102,7 +112,17 @@ class App extends Component {
      		/>
      		<section id='body'>
      			{this.capitalizeTitle()}
-     		{this.state.editing ? <EditEmployee person={this.state.editing}/>:<Table data={this.state.shownData}/>}
+     		{this.state.editing ? 
+     			<EditEmployee 
+     				person={this.state.editing}
+     				cancelEdit={this.cancelEdit.bind(this)}
+     				submitEdit={this.submitEdit.bind(this)}
+     			/>
+     			:
+	     		<Table 
+	     			editPerson={this.editPerson.bind(this)} 
+	     			data={this.state.shownData}
+	     		/>}
      		</section>
       	</div>
     )

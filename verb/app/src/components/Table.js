@@ -7,6 +7,7 @@ class Table extends Component {
     }
   }
   render () {
+    if(this.props.data.length>0){
     return (
         <table>
           <tr>
@@ -19,7 +20,7 @@ class Table extends Component {
             <tr 
                 key={person.id} 
                 className='t-row'
-                onClick={()=> this.setState({isOpen:true})}
+                onClick={()=> this.props.editPerson(person)}
             >
                 <td>{person.firstName}</td>
                 <td>{person.lastName}</td>
@@ -29,6 +30,7 @@ class Table extends Component {
         )}
        </table>
         );
+        } return null
     }
 }
 export default Table;

@@ -271,6 +271,22 @@ form {
 form input {
     margin-right: 30px;
 }
+#edit-employee button {
+    font-size: 18px;
+    color: white;
+    background-color:teal;
+    font-family: 'Muli', sans-serif;
+    border: none;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 5px;
+}
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
 @media only screen and (max-width: 850px) { 
     .nav-item {
         font-size: 22px;
