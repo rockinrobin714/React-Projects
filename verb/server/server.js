@@ -1,9 +1,10 @@
 const path = require('path');
 const express = require('express');
-const session = require('express-session');
 const router = require('./router/router.js');
 const bodyParser = require('body-parser');
 
+const db = require('./db/schema.js');
+const dbConnection = require('./db/connection.js');
 
 // Use express and export it
 const app = express();
