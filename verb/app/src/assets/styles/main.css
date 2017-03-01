@@ -248,16 +248,29 @@ th {
     text-align: left;
     padding-left: 20px;
 }
-th:hover {
-    cursor:pointer;
-    font-weight: 700;
-}
 .t-row:hover {
     cursor: pointer;
     font-weight: 700;
     background-color: teal;
 }
-
+.edit-employee-name {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+    color: teal;
+}
+.edit-employee-title{
+    font-size: 24px;
+    text-align: center;
+    padding-top: 20px;
+}
+form {
+    text-align: center;
+    font-size: 24px;
+}
+form input {
+    margin-right: 30px;
+}
 @media only screen and (max-width: 850px) { 
     .nav-item {
         font-size: 22px;

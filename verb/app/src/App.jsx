@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import NavBar from './components/NavBar';
 import Table from './components/Table';
+import EditEmployee from './components/EditEmployee';
 
 class App extends Component {
   constructor (props) {
@@ -30,7 +31,8 @@ class App extends Component {
             {id: 18, firstName:'Terry', lastName:'Samuel', region:'Houston', group:'support'},
             ],
         shownData: [],
-        index: 15
+        index: 15,
+        editing: {id: 18, firstName:'Terry', lastName:'Samuel', region:'Houston', group:'support'}
     }
   }
   componentDidMount(){
@@ -80,14 +82,17 @@ class App extends Component {
   	this.setState({currentGroup: 'none', shownData: filteredData})
   }
   capitalizeTitle(){
-  	if (this.state.searchTitle){
+  	if (this.state.editing) {
+  		return null;
+  	}else if (this.state.searchTitle){
   		return <h1 id='title'>{this.state.searchTitle}</h1>
   	} else {
   		const titles = {'all': 'All Employees', 'sales':'Sales', 'it':"IT", 'support':'Support'};
-  		return <h1 id='title'>{titles[this.state.currentGroup]}</h1>
+  		return <h1 onClick={()=>this.setState({openModal:true})} id='title'>{titles[this.state.currentGroup]}</h1>
   	}
   }	
   render () {
+  	console.log('modal in app is', this.state.openModal)
     return (
     	<div className='container'>
      		<NavBar 
@@ -97,7 +102,7 @@ class App extends Component {
      		/>
      		<section id='body'>
      			{this.capitalizeTitle()}
-     		<Table data={this.state.shownData}/>
+     		{this.state.editing ? <EditEmployee person={this.state.editing}/>:<Table data={this.state.shownData}/>}
      		</section>
       	</div>
     )
