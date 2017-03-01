@@ -19,36 +19,6 @@ app.use('/api', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.post('/employees', function(req, res) {
-    console.log('here')
-    var data = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        region: req.body.region,
-        group: req.body.description
-    };
-
-    db.User.findOne(catData)
-        .exec(function(err, thisCat) {
-            if (!thisCat) {
-                var newPerson = new db.User({
-                    firstName: 'Tom',
-				      lastName: 'Cruise',
-				      region:  'Austin',
-				      group: 'sales',
-                });
-                newPerson.save(function(err, newCat) {
-                    if (err) {
-                        res.status(500).send(err);
-                    } else {
-                        res.send("Person was added")
-                    }
-                });
-            } else {
-                res.send("Person already exists");
-            }
-        })
-});
 axios.post('/employees', {
       firstName: 'Tom',
       lastName: 'Cruise',
@@ -61,6 +31,38 @@ axios.post('/employees', {
     .catch(error => {
       console.log('Error while posting user: ',error);
     });
+
+app.post('/employees', function(req, res) {
+    console.log('here')
+    var data = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        region: req.body.region,
+        group: req.body.description
+    };
+
+    db.User.findOne(data)
+        .exec(function(err, thisPerson) {
+            if (!thisPerson) {
+                var newPerson = new db.User({
+                    firstName: 'Tom',
+				      lastName: 'Cruise',
+				      region:  'Austin',
+				      group: 'sales',
+                });
+                newPerson.save(function(err, newPerson) {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        res.send("Person was added")
+                    }
+                });
+            } else {
+                res.send("Person already exists");
+            }
+        })
+});
+
 // Serve the static client HTML files
 app.use(express.static(path.join(__dirname, '/../app/public')));
 // Serve the static client React files
