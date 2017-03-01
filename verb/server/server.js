@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const router = require('./router/router.js');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+
 
 // Use express and export it
 const app = express();
@@ -18,8 +18,6 @@ module.exports.NODEPORT = process.env.PORT || 4040;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// User cookie-parser to parse cookies we get from Facebook
-app.use(cookieParser());
 
 // Serve the static client HTML files
 app.use(express.static(path.join(__dirname, '/../app/public')));

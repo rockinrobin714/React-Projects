@@ -287,6 +287,9 @@ form input {
     justify-content: center;
 
 }
+button:hover {
+    cursor: pointer;
+}
 @media only screen and (max-width: 850px) { 
     .nav-item {
         font-size: 22px;
@@ -316,9 +319,13 @@ form input {
         font-size: 26px;
     }
     input {
-        margin-right: 10px
+        margin-right: 10px;
+        font-size: 12px;
     }
     th, td {
     padding-left: 10px
+    }
+    .search {
+        font-size:12px;
     }
 }
