@@ -17,9 +17,12 @@ module.exports.NODEPORT = process.env.PORT || 4040;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+//TODO: write update employee route to update user's group
+//TODO: seed DB with TONS of data
+//TODO: write search employee route to find employees based on search query
 
 // axios.put('http://localhost:4040/updateEmployee', { 
-//       firstName: 'Ted',
+//       firstName: 'Bob',
 //       lastName: 'Cruz',
 //       region:  'Dallas',
 //       group: 'sales'

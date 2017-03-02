@@ -36,7 +36,7 @@ class App extends Component {
        }
   }
   componentDidMount(){
-  	//change
+  	//TODO: add a get request to get data (15 at a time for pagination?)
 
 // var config = {
 //        headers: {
@@ -65,10 +65,14 @@ class App extends Component {
   	this.setState({editing: false})
   }
   submitEdit(){
-  	//callToDB
+  	//TODO: send post request to DB to submit edits
   	this.setState({editing: false})
   }
   filterData(){
+  	//TODO filter data based on group 
+  	//TODO pagination with data, 
+	  	//show 15 until scroll to certain point in page
+	  	//Then grab the next 15, etc etc
   	let sales = [];
   	let it = [];
   	let support = [];
@@ -98,6 +102,7 @@ class App extends Component {
   	this.setState({searchTitle: ''})
   }
   searchForPerson(query){
+  	//TODO: this now searches (small) dummy data, needs to be a get request to search ALL data
   	let filteredData = this.state.allData.filter( person => {
   		return person.firstName.toLowerCase().includes(query.toLowerCase()) || person.lastName.toLowerCase().includes(query.toLowerCase())
   	})
