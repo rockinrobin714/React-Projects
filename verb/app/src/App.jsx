@@ -33,22 +33,29 @@ class App extends Component {
         shownData: [],
         index: 15,
         editing: false
-        //editing: {id: 18, firstName:'Terry', lastName:'Samuel', region:'Houston', group:'support'}
-    }
+       }
   }
   componentDidMount(){
   	//change
- //axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
- axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; 
-  	axios.get('http://localhost:4040/employees',Access-Control-Allow-Origin: *)
-  .then(function (response) {
-    this.setState(allData:response.data);
-    this.setState(shownData:response.data);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  	//this.setState({shownData: this.state.allData})
+
+// var config = {
+//        headers: {
+//              'Content-Type': 'application/json',
+//              'Access-Control-Allow-Headers':'*',
+//              'Access-Control-Allow-Origin' : '*',
+//              'X-Requested-With': 'XMLHttpRequest'
+//        },
+
+// };
+//   	axios.get('http://localhost:4040/employees',config)
+//   .then(function (response) {
+//     this.setState(allData:response.data);
+//     this.setState(shownData:response.data);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+  	this.setState({shownData: this.state.allData})
   	this.filterData();
   }
   editPerson(person){
