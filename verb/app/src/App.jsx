@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import Table from './components/Table';
 import EditEmployee from './components/EditEmployee';
-
+const axios = require('axios');
 class App extends Component {
   constructor (props) {
     super(props);
@@ -38,8 +38,17 @@ class App extends Component {
   }
   componentDidMount(){
   	//change
-  	console.log('component did mount')
-  	this.setState({shownData: this.state.allData})
+ //axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; 
+  	axios.get('http://localhost:4040/employees',Access-Control-Allow-Origin: *)
+  .then(function (response) {
+    this.setState(allData:response.data);
+    this.setState(shownData:response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  	//this.setState({shownData: this.state.allData})
   	this.filterData();
   }
   editPerson(person){

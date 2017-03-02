@@ -7,7 +7,8 @@ module.exports = {
   entry: [
     "react-hot-loader/patch",
     "webpack-hot-middleware/client",
-    "./app/src/hotReload.js"
+    "./app/src/hotReload.js",
+    "whatwg-fetch"
   ],
 
   output: {

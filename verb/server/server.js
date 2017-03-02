@@ -1,8 +1,8 @@
 const path = require('path');
 const express = require('express');
-const router = require('./router/router.js');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const fetch = require('fetch');
 const db = require('./db/schema.js');
 const dbConnection = require('./db/connection.js');
 
@@ -13,55 +13,52 @@ module.exports.app = app;
 // Check to see if there is a port environment variable or just use port 4040 instead
 module.exports.NODEPORT = process.env.PORT || 4040;
 
-app.use('/api', router);
-
 // Use body-parser for parsing JSON and URLencoded body data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-axios.post('/employees', {
-      firstName: 'Tom',
-      lastName: 'Cruise',
-      region:  'Austin',
-      group: 'sales',
-    })
-    .then(response => {
-      console.log('User posted! ',response);
-    })
-    .catch(error => {
-      console.log('Error while posting user: ',error);
-    });
 
+// axios.put('http://localhost:4040/updateEmployee', { 
+//       firstName: 'Ted',
+//       lastName: 'Cruz',
+//       region:  'Dallas',
+//       group: 'sales'
+//     })
+//     .then(response => {
+//       console.log('User posted!');
+//     })
+//     .catch(error => {
+//       console.log('Error while posting user: ',error);
+//     });
+
+// db.scores.findOneAndUpdate
+// app.put('/employees', function(req, res) {
+// }
 app.post('/employees', function(req, res) {
-    console.log('here')
-    var data = {
+    var newPerson = new db.User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         region: req.body.region,
         group: req.body.description
-    };
-
-    db.User.findOne(data)
-        .exec(function(err, thisPerson) {
-            if (!thisPerson) {
-                var newPerson = new db.User({
-                    firstName: 'Tom',
-				      lastName: 'Cruise',
-				      region:  'Austin',
-				      group: 'sales',
-                });
-                newPerson.save(function(err, newPerson) {
-                    if (err) {
-                        res.status(500).send(err);
-                    } else {
-                        res.send("Person was added")
-                    }
-                });
-            } else {
-                res.send("Person already exists");
-            }
-        })
+    });
+    newPerson.save(function(err, newPerson) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send("Person was added")
+        }
+    });
 });
+app.get('/employees', function (req,res){
+	db.User.find().exec()
+        .then((users) => {
+          res.status(200).send(users);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(400);
+        })
+})
 
 // Serve the static client HTML files
 app.use(express.static(path.join(__dirname, '/../app/public')));
