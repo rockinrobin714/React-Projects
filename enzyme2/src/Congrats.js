@@ -1,13 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Congrats extends Component {
-  render() {
+const Congrats = props => {
+  if (props.success) {
     return (
-      <div>
-        Hi
+      <div data-test="component-congrats">
+        <span data-test="message-congrats">
+          Congratulations! You guess the word!
+        </span>
       </div>
+    )
+  } else {
+    return (
+      <div data-test="component-congrats" />
     );
   }
-}
+};
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired,
+};
 
 export default Congrats;
